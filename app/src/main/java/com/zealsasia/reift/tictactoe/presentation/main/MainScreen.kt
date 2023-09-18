@@ -44,20 +44,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
-            FlowRow(
-                modifier.aspectRatio(1f)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .weight(0.333f)
-                        .aspectRatio(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-
-                }
-            }
+            TicTacToeBoard()
         }
     }
 }
