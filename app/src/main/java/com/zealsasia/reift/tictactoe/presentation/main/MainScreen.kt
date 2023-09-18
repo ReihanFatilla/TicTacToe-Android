@@ -32,7 +32,7 @@ import com.zealsasia.reift.tictactoe.presentation.main.composables.bottomBar
 import com.zealsasia.reift.tictactoe.presentation.main.composables.topBar
 import com.zealsasia.reift.tictactoe.ui.theme.TicTacToeAndroidTheme
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     Scaffold(
