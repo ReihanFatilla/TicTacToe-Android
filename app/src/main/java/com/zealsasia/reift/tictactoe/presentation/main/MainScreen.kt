@@ -10,6 +10,7 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
@@ -19,18 +20,23 @@ import com.zealsasia.reift.tictactoe.presentation.main.composable.TopBar
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
+    val coroutineScope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded }
     )
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
-        sheetContent = { ListScreen() }
+        sheetContent = { ListScreen(coroutineScope = coroutineScope) }
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = TopBar(modifier),
-            bottomBar = BottomBar(modifier)
+            bottomBar = BottomBar(
+                modifier,
+                bottomSheetState = bottomSheetState,
+                coroutineScope = coroutineScope
+            )
         ) { paddingValues ->
             Column(
                 modifier = Modifier

@@ -1,11 +1,9 @@
 package com.zealsasia.reift.tictactoe.presentation.list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Scaffold
@@ -17,13 +15,13 @@ import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListPager
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListTabRow
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListScreen(modifier: Modifier = Modifier){
+fun ListScreen(modifier: Modifier = Modifier, coroutineScope: CoroutineScope){
     val listTicTacToe = TicTacToe.generateDummy()
-    val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
@@ -31,7 +29,7 @@ fun ListScreen(modifier: Modifier = Modifier){
 
     Scaffold(
         topBar = ListTabRow(pagerState = pagerState) { selectedIndex ->
-            scope.launch {
+            coroutineScope.launch {
                 pagerState.animateScrollToPage(selectedIndex)
             }
         }
@@ -54,6 +52,7 @@ fun ListScreen(modifier: Modifier = Modifier){
 @Composable
 fun ListScreenPreview(){
     ListScreen(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        coroutineScope = rememberCoroutineScope()
     )
 }

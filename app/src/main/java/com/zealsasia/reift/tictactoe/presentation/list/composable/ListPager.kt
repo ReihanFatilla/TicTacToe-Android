@@ -34,6 +34,7 @@ fun ListPager(modifier: Modifier = Modifier, listTicTacToe: List<TicTacToe>) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(
+                    modifier = Modifier.weight(0.75f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(
@@ -51,6 +52,7 @@ fun ListPager(modifier: Modifier = Modifier, listTicTacToe: List<TicTacToe>) {
                     Text(text = ticTacToe.name)
                 }
                 Icon(
+                    modifier = Modifier.weight(0.25f),
                     imageVector = Icons.Default.PlayArrow,
                     contentDescription = "play ${ticTacToe.name} button",
                     tint = Color.Blue

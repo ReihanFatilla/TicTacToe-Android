@@ -12,7 +12,7 @@ data class TicTacToe(
     companion object {
         fun generateDummy(): ArrayList<TicTacToe> {
             return arrayListOf<TicTacToe>().also { list ->
-                repeat(10) {
+                repeat(30) {
                     list.add(
                         TicTacToe(
                             id = it,
