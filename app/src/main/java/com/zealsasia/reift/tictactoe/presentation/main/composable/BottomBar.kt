@@ -1,4 +1,4 @@
-package com.zealsasia.reift.tictactoe.presentation.main.composables
+package com.zealsasia.reift.tictactoe.presentation.main.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-fun bottomBar(modifier: Modifier): @Composable () -> Unit = {
+fun BottomBar(modifier: Modifier): @Composable () -> Unit = {
     Row(
         modifier = modifier.padding(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
