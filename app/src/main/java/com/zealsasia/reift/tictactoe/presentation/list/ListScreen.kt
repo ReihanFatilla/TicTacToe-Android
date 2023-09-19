@@ -28,9 +28,7 @@ fun ListScreen(
     coroutineScope: CoroutineScope,
     viewModel: TicTacToeViewModel,
 ){
-    viewModel.getTicTacToeList(TicTacToeType.FINISHED)
 
-    val listTicTacToe = TicTacToe.generateDummy()
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f,
@@ -44,14 +42,14 @@ fun ListScreen(
         }
     ) { paddingValues ->
         HorizontalPager(
-            modifier = modifier.padding(paddingValues),
+            modifier = modifier.fillMaxSize().padding(paddingValues),
             pageCount = 2,
             state = pagerState,
             userScrollEnabled = true,
         ) { index ->
             when (index) {
                 0 -> {
-                    val value = viewModel.state.value
+                    val value = viewModel.onGoingState.value
                     when(value){
                         is Resource.Success -> {
                             ListPager(
@@ -67,7 +65,7 @@ fun ListScreen(
                     }
                 }
                 1 -> {
-                    val value = viewModel.state.value
+                    val value = viewModel.finishedState.value
                     when(value){
                         is Resource.Success -> {
                             ListPager(

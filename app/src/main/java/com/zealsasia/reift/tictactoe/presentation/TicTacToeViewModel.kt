@@ -18,28 +18,50 @@ import kotlinx.coroutines.launch
 
 class TicTacToeViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
 
-    private val _state: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
-    val state: State<Resource<List<TicTacToe>>> = _state
+    private val _onGoingState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
+    val onGoingState: State<Resource<List<TicTacToe>>> = _onGoingState
 
-    fun getTicTacToeList(ticTacToeType: TicTacToeType) {
-        Log.i("getTicTacToeLists", "getTicTacToeLists: Runned")
-        ticTacToeUseCase.getTicTacToeList(ticTacToeType = ticTacToeType).onEach { result ->
+    private val _finishedState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
+    val finishedState: State<Resource<List<TicTacToe>>> = _finishedState
+
+    fun getFinishedList() {
+        ticTacToeUseCase.getTicTacToeList(TicTacToeType.FINISHED).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    Log.i("getTicTacToeLists", "getTicTacToeLists: Success")
-                    _state.value = Resource.Success(result.data.orEmpty())
+                    _finishedState.value = Resource.Success(result.data.orEmpty())
                 }
 
                 is Resource.Loading -> {
-                    Log.i("getTicTacToeLists", "getTicTacToeLists: Loading")
-                    _state.value = Resource.Loading()
+                    _finishedState.value = Resource.Loading()
                 }
 
                 is Resource.Error -> {
-                    Log.i("getTicTacToeLists", "getTicTacToeLists: ${result.message}")
-                    _state.value = Resource.Error(result.message ?: "Error On Fetching Game")
+                    _finishedState.value = Resource.Error(result.message ?: "Error On Fetching Game")
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun getOnGoingList() {
+        ticTacToeUseCase.getTicTacToeList(TicTacToeType.ONGOING).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _onGoingState.value = Resource.Success(result.data.orEmpty())
+                }
+
+                is Resource.Loading -> {
+                    _onGoingState.value = Resource.Loading()
+                }
+
+                is Resource.Error -> {
+                    _onGoingState.value = Resource.Error(result.message ?: "Error On Fetching Game")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    init {
+        getFinishedList()
+        getOnGoingList()
     }
 }
