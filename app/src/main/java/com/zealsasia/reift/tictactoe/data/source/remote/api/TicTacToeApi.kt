@@ -5,7 +5,7 @@ import com.zealsasia.reift.tictactoe.data.source.remote.dto.TicTacToeDTO
 interface TicTacToeApi {
 
     companion object {
-        private const val BASE_URL = "http://127.0.0.1:8000"
+        private const val BASE_URL = "http://192.168.0.134:8000/api"
         const val GET_URL = "$BASE_URL/tictactoe"
     }
     suspend fun getTicTacToeList(): List<TicTacToeDTO>

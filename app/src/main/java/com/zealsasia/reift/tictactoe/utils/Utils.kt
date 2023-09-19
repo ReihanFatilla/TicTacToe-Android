@@ -7,7 +7,8 @@ import java.util.UUID
 object Utils {
     fun generateUserToken(): String {
         val uuid = UUID.randomUUID()
-        return uuid.toString()
+//        return uuid.toString()
+        return "abc123"
     }
 
     fun findTurn(gameState: List<List<String>>): String {

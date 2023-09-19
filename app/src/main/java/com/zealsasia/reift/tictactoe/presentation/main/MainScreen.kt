@@ -22,6 +22,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
+
     val viewModel = getViewModel<TicTacToeViewModel>()
 
     val coroutineScope = rememberCoroutineScope()

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -66,6 +67,9 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // kotlin serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     // ktor client
     implementation("io.ktor:ktor-client-core:1.6.5")
