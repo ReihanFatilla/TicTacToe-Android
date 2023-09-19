@@ -13,21 +13,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.zealsasia.reift.tictactoe.presentation.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
 import com.zealsasia.reift.tictactoe.presentation.main.composable.BottomBar
 import com.zealsasia.reift.tictactoe.presentation.main.composable.TopBar
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
+    val viewModel = getViewModel<TicTacToeViewModel>()
+
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded }
     )
+
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
-        sheetContent = { ListScreen(coroutineScope = coroutineScope) }
+        sheetContent = { ListScreen(coroutineScope = coroutineScope, viewModel = viewModel) }
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
