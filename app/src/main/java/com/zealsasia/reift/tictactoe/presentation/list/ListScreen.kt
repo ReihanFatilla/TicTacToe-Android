@@ -11,8 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
-import com.zealsasia.reift.tictactoe.presentation.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListPager
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListTabRow
 import com.zealsasia.reift.tictactoe.utils.Resource
@@ -26,8 +24,8 @@ import org.koin.androidx.compose.getViewModel
 fun ListScreen(
     modifier: Modifier = Modifier,
     coroutineScope: CoroutineScope,
-    viewModel: TicTacToeViewModel,
 ){
+    val viewModel = getViewModel<ListViewModel>()
 
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -54,7 +52,7 @@ fun ListScreen(
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.FINISHED })
+                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.ONGOING })
                         }
                         is Resource.Loading -> {
 
@@ -70,7 +68,7 @@ fun ListScreen(
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.ONGOING })
+                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.FINISHED })
                         }
                         is Resource.Loading -> {
 
@@ -91,6 +89,5 @@ fun ListScreenPreview(){
     ListScreen(
         modifier = Modifier.fillMaxSize(),
         coroutineScope = rememberCoroutineScope(),
-        viewModel = getViewModel(),
     )
 }

@@ -7,7 +7,7 @@ import com.zealsasia.reift.tictactoe.data.source.remote.api.TicTacToeApiImpl
 import com.zealsasia.reift.tictactoe.domain.repository.TicTacToeRepository
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseInteractor
-import com.zealsasia.reift.tictactoe.presentation.TicTacToeViewModel
+import com.zealsasia.reift.tictactoe.presentation.list.ListViewModel
 import com.zealsasia.reift.tictactoe.utils.Utils
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -16,7 +16,6 @@ import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.accept
 import io.ktor.client.request.header
@@ -29,7 +28,7 @@ import org.koin.dsl.module
 val ticTacToeModule = module {
     single<TicTacToeRepository> { TicTacToeRepositoryImpl(get()) }
     factory <TicTacToeUseCase> { TicTacToeUseInteractor(get()) }
-    viewModel { TicTacToeViewModel(get()) }
+    viewModel { ListViewModel(get()) }
 }
 
 val networkModule = module {

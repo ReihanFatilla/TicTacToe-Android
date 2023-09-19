@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
-import com.zealsasia.reift.tictactoe.presentation.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 
 @Composable

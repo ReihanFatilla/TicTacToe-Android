@@ -1,6 +1,5 @@
-package com.zealsasia.reift.tictactoe.presentation
+package com.zealsasia.reift.tictactoe.presentation.list
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -10,13 +9,10 @@ import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.utils.Resource
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
-class TicTacToeViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
+class ListViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
 
     private val _onGoingState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
     val onGoingState: State<Resource<List<TicTacToe>>> = _onGoingState
@@ -24,7 +20,7 @@ class TicTacToeViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
     private val _finishedState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
     val finishedState: State<Resource<List<TicTacToe>>> = _finishedState
 
-    fun getFinishedList() {
+    private fun getFinishedList() {
         ticTacToeUseCase.getTicTacToeList(TicTacToeType.FINISHED).onEach { result ->
             when (result) {
                 is Resource.Success -> {
@@ -42,7 +38,7 @@ class TicTacToeViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
         }.launchIn(viewModelScope)
     }
 
-    fun getOnGoingList() {
+    private fun getOnGoingList() {
         ticTacToeUseCase.getTicTacToeList(TicTacToeType.ONGOING).onEach { result ->
             when (result) {
                 is Resource.Success -> {
