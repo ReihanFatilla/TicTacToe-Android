@@ -24,6 +24,7 @@ import org.koin.androidx.compose.getViewModel
 fun ListScreen(
     modifier: Modifier = Modifier,
     coroutineScope: CoroutineScope,
+    onTicTacToeClicked: (List<List<String>>) -> Unit
 ){
     val viewModel = getViewModel<ListViewModel>()
 
@@ -52,7 +53,9 @@ fun ListScreen(
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.ONGOING })
+                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.ONGOING },
+                                onTicTacToeClicked = onTicTacToeClicked
+                                )
                         }
                         is Resource.Loading -> {
 
@@ -68,7 +71,9 @@ fun ListScreen(
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.FINISHED })
+                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.FINISHED },
+                                onTicTacToeClicked = onTicTacToeClicked
+                            )
                         }
                         is Resource.Loading -> {
 
@@ -89,5 +94,7 @@ fun ListScreenPreview(){
     ListScreen(
         modifier = Modifier.fillMaxSize(),
         coroutineScope = rememberCoroutineScope(),
-    )
+    ){
+
+    }
 }

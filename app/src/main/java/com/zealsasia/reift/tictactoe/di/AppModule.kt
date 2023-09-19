@@ -8,6 +8,7 @@ import com.zealsasia.reift.tictactoe.domain.repository.TicTacToeRepository
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseInteractor
 import com.zealsasia.reift.tictactoe.presentation.list.ListViewModel
+import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeVIewModel
 import com.zealsasia.reift.tictactoe.utils.Utils
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -29,6 +30,7 @@ val ticTacToeModule = module {
     single<TicTacToeRepository> { TicTacToeRepositoryImpl(get()) }
     factory <TicTacToeUseCase> { TicTacToeUseInteractor(get()) }
     viewModel { ListViewModel(get()) }
+    viewModel { TicTacToeVIewModel(get()) }
 }
 
 val networkModule = module {

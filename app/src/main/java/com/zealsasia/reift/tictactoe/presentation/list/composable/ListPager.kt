@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.presentation.list.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,12 +28,16 @@ import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 fun ListPager(
     modifier: Modifier = Modifier,
     listTicTacToe: List<TicTacToe>,
+    onTicTacToeClicked: (List<List<String>>) -> Unit,
 ) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         items(listTicTacToe) { ticTacToe ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable {
+                        onTicTacToeClicked(ticTacToe.gameState)
+                    }
                     .padding(24.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
