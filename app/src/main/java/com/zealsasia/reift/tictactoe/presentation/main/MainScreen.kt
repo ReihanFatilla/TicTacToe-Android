@@ -7,23 +7,27 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
-import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeVIewModel
+import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.composable.BottomBar
 import com.zealsasia.reift.tictactoe.presentation.main.composable.TopBar
+import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 
-    val viewModel = getViewModel<TicTacToeVIewModel>()
+    val viewModel = getViewModel<TicTacToeViewModel>()
 
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState(
@@ -33,13 +37,11 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
-        sheetContent = { ListScreen(coroutineScope = coroutineScope){ clickedGameState ->
-            viewModel.setCurrentTicTacToe(clickedGameState)
-        } }
+        sheetContent = { ListScreen(coroutineScope = coroutineScope) }
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            topBar = TopBar(modifier),
+            topBar = TopBar(modifier, title = viewModel.name.value),
             bottomBar = BottomBar(
                 modifier,
                 bottomSheetState = bottomSheetState,
@@ -52,7 +54,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     .padding(paddingValues),
                 verticalArrangement = Arrangement.Center,
             ) {
-                TicTacToeBoard(viewModel = viewModel)
+                TicTacToeBoard()
             }
         }
     }

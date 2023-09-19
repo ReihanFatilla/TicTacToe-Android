@@ -10,8 +10,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
-fun TopBar(modifier: Modifier): @Composable () -> Unit = {
+fun TopBar(modifier: Modifier, title: String): @Composable () -> Unit = {
     TopAppBar(modifier = modifier.padding(horizontal = 20.dp), title = {
-        Text(text = "Tic Tac Toe", textAlign = TextAlign.Center, modifier = modifier)
+        Text(text = title, textAlign = TextAlign.Center, modifier = modifier)
     })
 }

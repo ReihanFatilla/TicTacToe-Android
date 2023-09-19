@@ -11,7 +11,7 @@ object Utils {
         return "abc123"
     }
 
-    fun findTurn(gameState: List<List<String>>): String {
+    fun findTurn(gameState: Array<ArrayList<String>>): String {
         var xTotal = 0
         var oTotal = 0
 

@@ -28,7 +28,7 @@ import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 fun ListPager(
     modifier: Modifier = Modifier,
     listTicTacToe: List<TicTacToe>,
-    onTicTacToeClicked: (List<List<String>>) -> Unit,
+    onTicTacToeClicked: (TicTacToe) -> Unit,
 ) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         items(listTicTacToe) { ticTacToe ->
@@ -36,7 +36,7 @@ fun ListPager(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        onTicTacToeClicked(ticTacToe.gameState)
+                        onTicTacToeClicked(ticTacToe)
                     }
                     .padding(24.dp),
                 verticalAlignment = Alignment.CenterVertically,

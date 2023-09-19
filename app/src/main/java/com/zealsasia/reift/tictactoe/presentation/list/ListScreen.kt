@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListPager
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListTabRow
+import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.utils.Resource
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import kotlinx.coroutines.CoroutineScope
@@ -24,9 +26,9 @@ import org.koin.androidx.compose.getViewModel
 fun ListScreen(
     modifier: Modifier = Modifier,
     coroutineScope: CoroutineScope,
-    onTicTacToeClicked: (List<List<String>>) -> Unit
-){
-    val viewModel = getViewModel<ListViewModel>()
+) {
+    val listViewModel = getViewModel<ListViewModel>()
+    val ticTacToeViewModel = getViewModel<TicTacToeViewModel>()
 
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -41,43 +43,56 @@ fun ListScreen(
         }
     ) { paddingValues ->
         HorizontalPager(
-            modifier = modifier.fillMaxSize().padding(paddingValues),
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             pageCount = 2,
             state = pagerState,
             userScrollEnabled = true,
         ) { index ->
             when (index) {
                 0 -> {
-                    val value = viewModel.onGoingState.value
-                    when(value){
+                    val value = listViewModel.onGoingState.value
+                    when (value) {
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.ONGOING },
-                                onTicTacToeClicked = onTicTacToeClicked
-                                )
+                                listTicTacToe = value.data.orEmpty()
+                                    .filter { it.ticTacToeType == TicTacToeType.ONGOING },
+                                onTicTacToeClicked = {
+                                    ticTacToeViewModel.setCurrentTicTacToe(it)
+                                }
+                            )
                         }
+
                         is Resource.Loading -> {
 
                         }
+
                         is Resource.Error -> {
 
                         }
                     }
                 }
+
                 1 -> {
-                    val value = viewModel.finishedState.value
-                    when(value){
+                    val value = listViewModel.finishedState.value
+                    when (value) {
                         is Resource.Success -> {
                             ListPager(
                                 modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty().filter { it.ticTacToeType == TicTacToeType.FINISHED },
-                                onTicTacToeClicked = onTicTacToeClicked
+                                listTicTacToe = value.data.orEmpty()
+                                    .filter { it.ticTacToeType == TicTacToeType.FINISHED },
+                                onTicTacToeClicked = {
+                                    ticTacToeViewModel.setCurrentTicTacToe(it)
+                                }
                             )
                         }
+
                         is Resource.Loading -> {
 
                         }
+
                         is Resource.Error -> {
 
                         }
@@ -90,11 +105,9 @@ fun ListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun ListScreenPreview(){
+fun ListScreenPreview() {
     ListScreen(
         modifier = Modifier.fillMaxSize(),
         coroutineScope = rememberCoroutineScope(),
-    ){
-
-    }
+    )
 }

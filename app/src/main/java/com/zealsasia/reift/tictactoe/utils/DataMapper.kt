@@ -13,6 +13,6 @@ fun TicTacToeDTO.toModel(): TicTacToe {
     )
 }
 
-fun List<List<String?>>.map(): List<List<String>> {
-    return map { it.map { it.orEmpty() } }
+fun List<List<String?>>.map(): Array<ArrayList<String>> {
+    return map { it.map { it.orEmpty() } as ArrayList<String> }.toTypedArray()
 }
