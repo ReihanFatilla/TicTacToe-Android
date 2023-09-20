@@ -22,4 +22,12 @@ class TicTacToeRepositoryImpl(
         }
     }
 
+    override fun saveTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>> {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TicTacToeDTO(
-    val id: Int,
-    val name: String,
+    val id: Int? = null,
+    val name: String? = null,
     val type: String,
     val game_state : List<List<String?>>
 )

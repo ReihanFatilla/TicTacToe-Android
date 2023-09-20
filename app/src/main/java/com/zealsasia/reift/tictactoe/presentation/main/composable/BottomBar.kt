@@ -45,57 +45,18 @@ fun BottomBar(
             modifier = modifier.padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            SaveDialog(
-                openDialog,
-                onDialogClose = {
-                    openDialog = false
-                },
-                onSaveClick = { name ->
-
-                }
-            )
             BottomButtons(viewModel, coroutineScope, bottomSheetState) {
                 openDialog = true
             }
         }
-    }
 
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun RowScope.BottomButtons(
-    viewModel: TicTacToeViewModel,
-    coroutineScope: CoroutineScope,
-    bottomSheetState: ModalBottomSheetState,
-    onSavedClicked: () -> Unit,
-) {
-    Button(modifier = Modifier.weight(0.5f),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-        onClick = {
-            coroutineScope.launch {
-                bottomSheetState.show()
+        SaveDialog(
+            openDialog,
+            onDialogClose = {
+                openDialog = false
+            },
+            onSaveClick = { name ->
+
             }
-        }) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "List")
-            Spacer(modifier = Modifier.width(12.dp))
-            Icon(
-                imageVector = Icons.Default.List,
-                contentDescription = "Show List button"
-            )
-        }
+        )
     }
-    Button(modifier = Modifier.weight(0.25f),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-        onClick = {
-            onSavedClicked()
-        }) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = "Save button")
-    }
-    Button(modifier = Modifier.weight(0.25f),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
-        onClick = {
-            viewModel.resetTicTacToe()
-        }) {
-        Icon(imageVector = Icons.Default.Refresh, contentDescription = "reset button")
-    }
-}

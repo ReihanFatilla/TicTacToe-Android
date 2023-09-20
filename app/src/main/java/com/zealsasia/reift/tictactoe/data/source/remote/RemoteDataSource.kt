@@ -9,4 +9,10 @@ class RemoteDataSource(
     suspend fun getTicTacToeList(): List<TicTacToeDTO> {
         return ticTacToeApi.getTicTacToeList()
     }
+    suspend fun postTicTacToeList(ticTacToeDTO: TicTacToeDTO): String {
+        return ticTacToeApi.postTicTacToeList(ticTacToeDTO)
+    }
+    suspend fun updateTicTacToeList(ticTacToeDTO: TicTacToeDTO): String {
+        return ticTacToeApi.updateTicTacToeList(ticTacToeDTO)
+    }
 }
