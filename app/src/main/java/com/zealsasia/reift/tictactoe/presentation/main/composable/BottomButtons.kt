@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -29,7 +30,6 @@ fun RowScope.BottomButtons(
     viewModel: TicTacToeViewModel,
     coroutineScope: CoroutineScope,
     bottomSheetState: ModalBottomSheetState,
-    onSavedClicked: () -> Unit,
 ) {
     Button(modifier = Modifier.weight(0.5f),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
@@ -50,7 +50,9 @@ fun RowScope.BottomButtons(
     Button(modifier = Modifier.weight(0.25f),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
         onClick = {
-            onSavedClicked()
+            if(!viewModel.checkIfGameStateEmpty()){
+                viewModel.openDialog = true
+            }
         }) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "Save button")
     }

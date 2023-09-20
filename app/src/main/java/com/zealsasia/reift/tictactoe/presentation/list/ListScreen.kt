@@ -53,40 +53,23 @@ fun ListScreen(
             state = pagerState,
             userScrollEnabled = true,
         ) { index ->
-            when (index) {
-                0 -> {
-                    when (value) {
-                        is Resource.Success -> {
-                            ListPager(
-                                modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty()
-                                    .filter { it.ticTacToeType == TicTacToeType.ONGOING },
-                                onTicTacToeClicked = {
-                                    ticTacToeViewModel.setCurrentTicTacToe(it)
-                                }
-                            )
+            when (value) {
+                is Resource.Success -> {
+                    ListPager(
+                        modifier = modifier.fillMaxWidth(),
+                        listTicTacToe = value.data.orEmpty()
+                            .filter { it.ticTacToeType == (if(index == 0) TicTacToeType.ONGOING else TicTacToeType.FINISHED) },
+                        onTicTacToeClicked = {
+                            if(ticTacToeViewModel.checkIfGameStateEmpty()){
+                                ticTacToeViewModel.setCurrentTicTacToe(it)
+                            } else {
+                                ticTacToeViewModel.openDialog = true
+                            }
                         }
-                        is Resource.Loading -> {}
-                        is Resource.Error -> {}
-                    }
+                    )
                 }
-
-                1 -> {
-                    when (value) {
-                        is Resource.Success -> {
-                            ListPager(
-                                modifier = modifier.fillMaxWidth(),
-                                listTicTacToe = value.data.orEmpty()
-                                    .filter { it.ticTacToeType == TicTacToeType.FINISHED },
-                                onTicTacToeClicked = {
-                                    ticTacToeViewModel.setCurrentTicTacToe(it)
-                                }
-                            )
-                        }
-                        is Resource.Loading -> {}
-                        is Resource.Error -> {}
-                    }
-                }
+                is Resource.Loading -> {}
+                is Resource.Error -> {}
             }
         }
     }

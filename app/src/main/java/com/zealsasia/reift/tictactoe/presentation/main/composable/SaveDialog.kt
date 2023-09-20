@@ -13,6 +13,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,16 +23,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
+import kotlinx.coroutines.flow.update
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun SaveDialog(openDialog: Boolean, onSaveClick: (String) -> Unit, onDialogClose: () -> Unit) {
+fun SaveDialog(onSaveClick: (String) -> Unit) {
     var name by remember { mutableStateOf("") }
 
-    if (openDialog) {
+    val viewModel = getViewModel<TicTacToeViewModel>()
+
+    if (viewModel.openDialog) {
         AlertDialog(
             shape = RoundedCornerShape(10.dp),
             onDismissRequest = {
-                onDialogClose()
+                viewModel.openDialog = false
             },
             title = {
                 Text(text = "Do you want to save your Current Game Progress?")
@@ -59,7 +65,7 @@ fun SaveDialog(openDialog: Boolean, onSaveClick: (String) -> Unit, onDialogClose
                         horizontalArrangement = Arrangement.SpaceAround) {
 
                         TextButton(onClick = {
-                            onDialogClose()
+                            viewModel.openDialog = false
                         }) {
                             Text(
                                 "Not Now",

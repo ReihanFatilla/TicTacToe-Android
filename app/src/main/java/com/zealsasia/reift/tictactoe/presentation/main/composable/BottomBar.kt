@@ -31,6 +31,7 @@ import com.zealsasia.reift.tictactoe.presentation.list.ListViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.utils.Resource
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
@@ -44,22 +45,14 @@ fun BottomBar(
         val viewModel = getViewModel<TicTacToeViewModel>()
         val listViewModel = getViewModel<ListViewModel>()
 
-        var openDialog by remember { mutableStateOf(false) }
-
         Row(
             modifier = modifier.padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            BottomButtons(viewModel, coroutineScope, bottomSheetState) {
-                openDialog = true
-            }
+            BottomButtons(viewModel, coroutineScope, bottomSheetState)
         }
 
         SaveDialog(
-            openDialog,
-            onDialogClose = {
-                openDialog = false
-            },
             onSaveClick = { name ->
                 if (viewModel.isUpdateMode) {
                     viewModel.updateTicTacToe(name)
@@ -67,7 +60,7 @@ fun BottomBar(
                     viewModel.saveTicTacToe(name)
                 }
                 listViewModel.getTicTacToeList()
-                openDialog = false
+                viewModel.openDialog = false
             }
         )
     }

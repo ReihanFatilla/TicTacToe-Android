@@ -2,6 +2,7 @@ package com.zealsasia.reift.tictactoe.presentation.main
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,6 +24,8 @@ class TicTacToeViewModel(
 
     private val _ticTacToeState = MutableStateFlow(TicTacToe.initial)
     val ticTacToeState get() = _ticTacToeState as StateFlow<TicTacToe>
+
+    var openDialog by mutableStateOf(false)
 
     var isFinished by mutableStateOf(false)
     var isUpdateMode by mutableStateOf(false)
@@ -84,6 +87,10 @@ class TicTacToeViewModel(
             }
         }.launchIn(viewModelScope)
         resetTicTacToe()
+    }
+
+    fun checkIfGameStateEmpty(): Boolean {
+        return ticTacToeState.value.gameState == TicTacToe.initial.gameState
     }
 
 }
