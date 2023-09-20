@@ -30,7 +30,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalLayoutApi::class)
 fun TicTacToeBoard(modifier: Modifier = Modifier) {
     val viewModel = getViewModel<TicTacToeViewModel>()
-    val gameState by viewModel.ticTacToeState.collectAsState()
+    val ticTacToeState by viewModel.ticTacToeState.collectAsState()
     FlowRow(
         modifier
             .aspectRatio(1f),
@@ -39,7 +39,7 @@ fun TicTacToeBoard(modifier: Modifier = Modifier) {
     ) {
         repeat(3) { row ->
             repeat(3) { column ->
-                TicTacToe(row, column, gameState) {
+                TicTacToe(row, column, ticTacToeState.gameState) {
                     viewModel.setOnClickState(row, column)
                 }
             }
@@ -48,7 +48,7 @@ fun TicTacToeBoard(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun RowScope.TicTacToe(row: Int, column: Int, gameState: Array<ArrayList<String>>, onClick: () -> Unit) {
+fun RowScope.TicTacToe(row: Int, column: Int, gameState: List<List<String>>, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .weight(0.333f)

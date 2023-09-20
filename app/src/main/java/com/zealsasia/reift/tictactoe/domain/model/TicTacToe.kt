@@ -7,9 +7,22 @@ data class TicTacToe(
     val name: String,
     val ticTacToeType: TicTacToeType,
     val currentTurn: String,
-    val gameState: Array<ArrayList<String>>,
+    val gameState: List<List<String>>,
 ) {
     companion object {
+
+        val initial = TicTacToe(
+            id = 0,
+            name = "Tic Tac Toe",
+            ticTacToeType = TicTacToeType.ONGOING,
+            currentTurn = "X",
+            gameState = listOf(
+                listOf("", "", ""),
+                listOf("", "", ""),
+                listOf("", "", ""),
+            )
+        )
+
         fun generateDummy(): ArrayList<TicTacToe> {
             return arrayListOf<TicTacToe>().also { list ->
                 repeat(30) {
@@ -19,10 +32,10 @@ data class TicTacToe(
                             name = "Play on 1 September 2023 | 13:00 PM",
                             ticTacToeType = TicTacToeType.values().random(),
                             currentTurn = "X",
-                            gameState = arrayOf(
-                                arrayListOf("","","O"),
-                                arrayListOf("","X","O"),
-                                arrayListOf("","","")
+                            gameState = listOf(
+                                listOf("","","O"),
+                                listOf("","X","O"),
+                                listOf("","","")
                             )
                         )
                     )

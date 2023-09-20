@@ -12,6 +12,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +29,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 
-    val viewModel = getViewModel<TicTacToeViewModel>()
+    val titleState by getViewModel<TicTacToeViewModel>().ticTacToeState.collectAsState()
 
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState(
@@ -41,7 +43,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            topBar = TopBar(modifier, title = viewModel.name.value),
+            topBar = TopBar(modifier, title = titleState.name),
             bottomBar = BottomBar(
                 modifier,
                 bottomSheetState = bottomSheetState,

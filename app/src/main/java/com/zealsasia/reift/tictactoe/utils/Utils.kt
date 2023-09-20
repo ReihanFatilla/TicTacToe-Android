@@ -11,7 +11,7 @@ object Utils {
         return "abc123"
     }
 
-    fun isGameFinished(board: Array<ArrayList<String>>): Boolean {
+    fun isGameFinished(board: List<List<String>>): Boolean {
         for (i in 0 until 3) {
             if (board[i][0] != "" && board[i][0] == board[i][1] && board[i][1] == board[i][2]) return true
             if (board[0][i] != "" && board[0][i] == board[1][i] && board[1][i] == board[2][i]) return true
@@ -21,7 +21,7 @@ object Utils {
     }
 
 
-    fun findTurn(gameState: Array<ArrayList<String>>): String {
+    fun findTurn(gameState: List<List<String>>): String {
         var xTotal = 0
         var oTotal = 0
 

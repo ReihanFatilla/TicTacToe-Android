@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 fun BottomBar(
@@ -31,6 +33,7 @@ fun BottomBar(
     coroutineScope: CoroutineScope
 ): @Composable () -> Unit =
     {
+        val viewModel = getViewModel<TicTacToeViewModel>()
         Row(
             modifier = modifier.padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -53,12 +56,16 @@ fun BottomBar(
             }
             Button(modifier = Modifier.weight(0.25f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-                onClick = { /*TODO*/ }) {
+                onClick = {
+
+                }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Save button")
             }
             Button(modifier = Modifier.weight(0.25f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
-                onClick = { /*TODO*/ }) {
+                onClick = {
+                    viewModel.resetTicTacToe()
+                }) {
                 Icon(imageVector = Icons.Default.Refresh, contentDescription = "reset button")
             }
         }
