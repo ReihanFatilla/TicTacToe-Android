@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.presentation.main
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -79,7 +80,7 @@ class TicTacToeViewModel(
 
     fun updateTicTacToe(name: String = ticTacToeState.value.name.orEmpty()) {
         val id = ticTacToeState.value.id
-        ticTacToeUseCase.saveTicTacToe(ticTacToeState.value.copy(id = id, name = name)).onEach { result ->
+        ticTacToeUseCase.updateTicTacToe(ticTacToeState.value.copy(id = id, name = name)).onEach { result ->
             postUpdateState = when (result) {
                 is Resource.Success -> Resource.Success(result.data)
                 is Resource.Loading -> Resource.Loading()

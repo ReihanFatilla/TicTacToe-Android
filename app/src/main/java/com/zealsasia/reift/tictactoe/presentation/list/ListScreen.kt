@@ -58,7 +58,7 @@ fun ListScreen(
                     ListPager(
                         modifier = modifier.fillMaxWidth(),
                         listTicTacToe = value.data.orEmpty()
-                            .filter { it.ticTacToeType == (if(index == 0) TicTacToeType.ONGOING else TicTacToeType.FINISHED) },
+                            .filter { it.ticTacToeType == if(index == 0) TicTacToeType.ONGOING else TicTacToeType.FINISHED },
                         onTicTacToeClicked = {
                             if(ticTacToeViewModel.checkIfGameStateEmpty()){
                                 ticTacToeViewModel.setCurrentTicTacToe(it)

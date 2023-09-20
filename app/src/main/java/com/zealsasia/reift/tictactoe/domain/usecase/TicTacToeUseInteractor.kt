@@ -16,6 +16,6 @@ class TicTacToeUseInteractor(val ticTacToeRepository: TicTacToeRepository): TicT
     }
 
     override fun updateTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>> {
-        return ticTacToeRepository.saveTicTacToe(ticTacToe)
+        return ticTacToeRepository.updateTicTacToe(ticTacToe)
     }
 }

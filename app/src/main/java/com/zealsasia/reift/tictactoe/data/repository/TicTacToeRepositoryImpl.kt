@@ -28,7 +28,7 @@ class TicTacToeRepositoryImpl(
         try {
             emit(Resource.Loading())
             val message = remoteDataSource.saveTicTacToe(ticTacToe.toDTO()).message
-            Log.i("saveTicTacToe", "saveTicTacToe: $message")
+            Log.i("saveTicTacToesss", "message: $message")
             emit(Resource.Success(data = message))
         } catch (e: Exception){
             emit(Resource.Error(message = e.message ?: "Error"))

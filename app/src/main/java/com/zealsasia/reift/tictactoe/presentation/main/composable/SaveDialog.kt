@@ -49,8 +49,17 @@ fun SaveDialog(onSaveClick: (String) -> Unit) {
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
                     maxLines = 1,
-                    onValueChange = { name = it },
-                    label = { Text("Saved Name (optional)", color = Color.DarkGray, fontWeight = FontWeight.Normal, fontSize = 11.sp) }
+                    onValueChange = {
+                        if (it.length <= 32) name = it
+                    },
+                    label = {
+                        Text(
+                            "Saved Name (optional)",
+                            color = Color.DarkGray,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 11.sp
+                        )
+                    }
                 )
             },
             buttons = {
@@ -62,7 +71,8 @@ fun SaveDialog(onSaveClick: (String) -> Unit) {
                         Modifier
                             .fillMaxWidth()
                             .padding(top = 10.dp),
-                        horizontalArrangement = Arrangement.SpaceAround) {
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
 
                         TextButton(onClick = {
                             viewModel.openDialog = false
@@ -76,7 +86,7 @@ fun SaveDialog(onSaveClick: (String) -> Unit) {
                             onSaveClick(name)
                         }) {
                             Text(
-                                "Save",
+                                if (viewModel.isUpdateMode) "Update" else "Save",
                                 color = Color.Blue,
                                 fontWeight = FontWeight.ExtraBold,
                             )

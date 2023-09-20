@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.presentation.main.composable
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -43,7 +44,6 @@ fun BottomBar(
 ): @Composable () -> Unit =
     {
         val viewModel = getViewModel<TicTacToeViewModel>()
-        val listViewModel = getViewModel<ListViewModel>()
 
         Row(
             modifier = modifier.padding(horizontal = 20.dp),
@@ -56,10 +56,11 @@ fun BottomBar(
             onSaveClick = { name ->
                 if (viewModel.isUpdateMode) {
                     viewModel.updateTicTacToe(name)
+                    Log.i("BottomBarss", "BottomBarss: update")
                 } else {
+                    Log.i("BottomBarss", "BottomBarss: save")
                     viewModel.saveTicTacToe(name)
                 }
-                listViewModel.getTicTacToeList()
                 viewModel.openDialog = false
             }
         )
