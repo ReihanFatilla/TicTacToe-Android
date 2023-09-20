@@ -56,7 +56,7 @@ fun BottomBar(
                 openDialog = false
             },
             onSaveClick = { name ->
-
+                viewModel.saveTicTacToe(name)
             }
         )
     }

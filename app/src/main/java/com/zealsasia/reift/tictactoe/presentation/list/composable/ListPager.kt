@@ -58,7 +58,7 @@ fun ListPager(
                         Text(text = ticTacToe.currentTurn)
                     }
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text(text = ticTacToe.name)
+                    Text(text = ticTacToe.name.orEmpty())
                 }
                 Icon(
                     modifier = Modifier.weight(0.25f),

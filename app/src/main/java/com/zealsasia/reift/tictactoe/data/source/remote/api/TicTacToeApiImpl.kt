@@ -17,7 +17,7 @@ class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
         }
     }
 
-    override suspend fun postTicTacToeList(ticTacToeDTO: TicTacToeDTO): String {
+    override suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): String {
         return httpClient.post {
             url(TicTacToeApi.GET_URL)
             contentType(ContentType.Application.Json)
@@ -25,7 +25,7 @@ class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
         }
     }
 
-    override suspend fun updateTicTacToeList(ticTacToeDTO: TicTacToeDTO): String {
+    override suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): String {
         return httpClient.patch {
             url(TicTacToeApi.GET_URL)
             contentType(ContentType.Application.Json)

@@ -3,8 +3,8 @@ package com.zealsasia.reift.tictactoe.domain.model
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 
 data class TicTacToe(
-    val id: Int,
-    val name: String,
+    val id: Int? = null,
+    val name: String? = null,
     val ticTacToeType: TicTacToeType,
     val currentTurn: String,
     val gameState: List<List<String>>,
@@ -12,7 +12,7 @@ data class TicTacToe(
     companion object {
 
         val initial = TicTacToe(
-            id = 0,
+            id = null,
             name = "Tic Tac Toe",
             ticTacToeType = TicTacToeType.ONGOING,
             currentTurn = "X",

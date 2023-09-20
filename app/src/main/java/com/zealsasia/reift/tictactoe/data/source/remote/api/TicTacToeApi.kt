@@ -9,6 +9,6 @@ interface TicTacToeApi {
         const val GET_URL = "$BASE_URL/tictactoe"
     }
     suspend fun getTicTacToeList(): List<TicTacToeDTO>
-    suspend fun postTicTacToeList(ticTacToeDTO: TicTacToeDTO): String
-    suspend fun updateTicTacToeList(ticTacToeDTO: TicTacToeDTO): String
+    suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): String
+    suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): String
 }

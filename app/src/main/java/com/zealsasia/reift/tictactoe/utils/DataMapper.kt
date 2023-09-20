@@ -13,6 +13,15 @@ fun TicTacToeDTO.toModel(): TicTacToe {
     )
 }
 
+fun TicTacToe.toDTO(): TicTacToeDTO {
+    return TicTacToeDTO(
+        id = id,
+        name = name,
+        type = if(ticTacToeType == TicTacToeType.ONGOING) "ongoing" else "finished",
+        game_state = gameState
+    )
+}
+
 fun List<List<String?>>.map(): List<List<String>> {
     return map { it.map { it.orEmpty() } }
 }

@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
+import com.zealsasia.reift.tictactoe.presentation.common.LoadingAndSuccessDialog
 import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.composable.BottomBar
@@ -48,7 +49,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            topBar = TopBar(modifier, title = state.name),
+            topBar = TopBar(modifier, title = state.name.orEmpty()),
             bottomBar = BottomBar(
                 modifier,
                 bottomSheetState = bottomSheetState,
@@ -63,6 +64,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 WinnerOrTurnText(state, modifier)
                 TicTacToeBoard(modifier.align(Alignment.Center))
             }
+            LoadingAndSuccessDialog()
         }
     }
 }
