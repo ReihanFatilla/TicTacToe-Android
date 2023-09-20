@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.data.repository
 
+import android.util.Log
 import com.zealsasia.reift.tictactoe.data.source.remote.RemoteDataSource
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.domain.repository.TicTacToeRepository
@@ -26,7 +27,8 @@ class TicTacToeRepositoryImpl(
     override fun saveTicTacToe(ticTacToe: TicTacToe) = flow {
         try {
             emit(Resource.Loading())
-            val message = remoteDataSource.saveTicTacToe(ticTacToe.toDTO())
+            val message = remoteDataSource.saveTicTacToe(ticTacToe.toDTO()).message
+            Log.i("saveTicTacToe", "saveTicTacToe: $message")
             emit(Resource.Success(data = message))
         } catch (e: Exception){
             emit(Resource.Error(message = e.message ?: "Error"))
@@ -36,7 +38,7 @@ class TicTacToeRepositoryImpl(
     override fun updateTicTacToe(ticTacToe: TicTacToe) = flow {
         try {
             emit(Resource.Loading())
-            val message = remoteDataSource.updateTicTacToe(ticTacToe.toDTO())
+            val message = remoteDataSource.updateTicTacToe(ticTacToe.toDTO()).message
             emit(Resource.Success(data = message))
         } catch (e: Exception){
             emit(Resource.Error(message = e.message ?: "Error"))

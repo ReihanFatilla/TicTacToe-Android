@@ -21,7 +21,7 @@ object Utils {
     }
 
 
-    fun findTurn(gameState: List<List<String>>): String {
+    fun findTurn(gameState: List<List<String>>, isFinished: Boolean): String {
         var xTotal = 0
         var oTotal = 0
 
@@ -35,6 +35,6 @@ object Utils {
             }
         }
 
-        return if(xTotal > oTotal) "O" else "X"
+        return if(xTotal > oTotal && !isFinished) "O" else "X"
     }
 }

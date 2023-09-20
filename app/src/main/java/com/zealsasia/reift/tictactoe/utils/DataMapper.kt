@@ -8,7 +8,7 @@ fun TicTacToeDTO.toModel(): TicTacToe {
         id = id,
         name = name,
         ticTacToeType = if(type == "ongoing") TicTacToeType.ONGOING else TicTacToeType.FINISHED,
-        currentTurn = Utils.findTurn(game_state.map()),
+        currentTurn = Utils.findTurn(game_state.map(), type == "finished"),
         gameState = game_state.map()
     )
 }

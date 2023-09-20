@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.data.source.remote.api
 
+import com.zealsasia.reift.tictactoe.data.source.remote.dto.PostUpdateDTO
 import com.zealsasia.reift.tictactoe.data.source.remote.dto.TicTacToeDTO
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -17,7 +18,7 @@ class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
         }
     }
 
-    override suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): String {
+    override suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
         return httpClient.post {
             url(TicTacToeApi.GET_URL)
             contentType(ContentType.Application.Json)
@@ -25,7 +26,7 @@ class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
         }
     }
 
-    override suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): String {
+    override suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
         return httpClient.patch {
             url(TicTacToeApi.GET_URL)
             contentType(ContentType.Application.Json)

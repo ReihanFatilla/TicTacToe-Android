@@ -2,7 +2,6 @@ package com.zealsasia.reift.tictactoe.presentation.main
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,7 +25,7 @@ class TicTacToeViewModel(
     val ticTacToeState get() = _ticTacToeState as StateFlow<TicTacToe>
 
     var isFinished by mutableStateOf(false)
-    var message by mutableStateOf<String?>(null)
+    var postUpdateState by mutableStateOf<Resource<String?>?>(null)
 
     fun setOnClickState(row: Int, column: Int) {
         if (ticTacToeState.value.gameState[row][column] == "" && !isFinished) {
@@ -55,17 +54,18 @@ class TicTacToeViewModel(
     }
 
     fun setCurrentTicTacToe(ticTacToe: TicTacToe) {
+        isFinished = ticTacToe.ticTacToeType == TicTacToeType.FINISHED
         _ticTacToeState.update {
             ticTacToe
         }
     }
 
-    fun saveTicTacToe(name: String = ticTacToeState.value.name.orEmpty()) {
+    fun saveTicTacToe(name: String = "") {
         ticTacToeUseCase.saveTicTacToe(ticTacToeState.value.copy(name = name)).onEach { result ->
-            message = when (result) {
-                is Resource.Success -> result.data
-                is Resource.Loading -> "loading"
-                is Resource.Error -> result.data.orEmpty()
+            postUpdateState = when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Loading -> Resource.Loading()
+                is Resource.Error -> Resource.Error(result.message ?: "Error")
             }
         }.launchIn(viewModelScope)
     }
@@ -73,10 +73,10 @@ class TicTacToeViewModel(
     fun updateTicTacToe(name: String = ticTacToeState.value.name.orEmpty()) {
         val id = ticTacToeState.value.id
         ticTacToeUseCase.saveTicTacToe(ticTacToeState.value.copy(id = id, name = name)).onEach { result ->
-            message = when (result) {
-                is Resource.Success -> result.data
-                is Resource.Loading -> "loading"
-                is Resource.Error -> result.data.orEmpty()
+            postUpdateState = when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Loading -> Resource.Loading()
+                is Resource.Error -> Resource.Error(result.message ?: "Error")
             }
         }.launchIn(viewModelScope)
     }

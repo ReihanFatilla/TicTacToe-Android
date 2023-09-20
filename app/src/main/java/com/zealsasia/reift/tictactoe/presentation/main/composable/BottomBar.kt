@@ -1,5 +1,6 @@
 package com.zealsasia.reift.tictactoe.presentation.main.composable
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -24,8 +25,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
+import com.zealsasia.reift.tictactoe.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -57,6 +60,7 @@ fun BottomBar(
             },
             onSaveClick = { name ->
                 viewModel.saveTicTacToe(name)
+                openDialog = false
             }
         )
     }
