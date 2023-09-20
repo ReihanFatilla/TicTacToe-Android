@@ -11,6 +11,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -69,7 +71,7 @@ fun RowScope.TicTacToe(row: Int, column: Int, gameState: List<List<String>>, onC
         } else if (gameState[row][column] == "O") {
             Icon(
                 modifier = Modifier.size(64.dp),
-                imageVector = Icons.Default.AddCircle,
+                imageVector = Icons.Default.Favorite,
                 contentDescription = "X"
             )
         }

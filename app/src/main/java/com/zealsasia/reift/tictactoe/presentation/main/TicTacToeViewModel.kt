@@ -1,6 +1,8 @@
 package com.zealsasia.reift.tictactoe.presentation.main
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
@@ -18,18 +20,18 @@ class TicTacToeViewModel(
     private val _ticTacToeState = MutableStateFlow(TicTacToe.initial)
     val ticTacToeState get() = _ticTacToeState as StateFlow<TicTacToe>
 
-    val isFinished = mutableStateOf(false)
+    var isFinished by mutableStateOf(false)
 
     fun setOnClickState(row: Int, column: Int) {
-        if (ticTacToeState.value.gameState[row][column] == "" && !isFinished.value) {
+        if (ticTacToeState.value.gameState[row][column] == "" && !isFinished) {
             _ticTacToeState.getAndUpdate {
                 val newState = it.gameState.map { it.toMutableList() }
                 newState[row][column] = it.currentTurn
                 checkIfGameFinished(newState)
                 it.copy(
                     gameState = newState,
-                    ticTacToeType = if(isFinished.value) TicTacToeType.FINISHED else TicTacToeType.ONGOING,
-                    currentTurn = if (it.currentTurn == "X") "O" else "X"
+                    ticTacToeType = if(isFinished) TicTacToeType.FINISHED else TicTacToeType.ONGOING,
+                    currentTurn = if(!isFinished) if (it.currentTurn == "X") "O" else "X" else it.currentTurn
                 )
             }
         }
@@ -37,11 +39,12 @@ class TicTacToeViewModel(
 
     fun resetTicTacToe(){
         _ticTacToeState.update { TicTacToe.initial }
+        isFinished = false
     }
 
-    fun checkIfGameFinished(state: List<MutableList<String>>) {
+    private fun checkIfGameFinished(state: List<MutableList<String>>) {
         if (Utils.isGameFinished(state)) {
-            isFinished.value = true
+            isFinished = true
         }
     }
 
@@ -50,4 +53,5 @@ class TicTacToeViewModel(
             ticTacToe
         }
     }
+
 }
