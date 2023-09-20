@@ -34,6 +34,33 @@ object Utils {
             }
         }
 
-        return if(xTotal > oTotal && !isFinished) "O" else "X"
+        return if (xTotal > oTotal && !isFinished) "O" else "X"
     }
+
+
+
+    // ...
+
+    fun getWinningCombination(gameState: List<List<String>>): WinningCombination? {
+
+        for (i in 0 until 3) {
+            if (gameState[i][0] == gameState[i][1] && gameState[i][1] == gameState[i][2] && gameState[i][0].isNotEmpty()) {
+                return WinningCombination(Pair(i, 0), Pair(i, 2))
+            }
+
+            if (gameState[0][i] == gameState[1][i] && gameState[1][i] == gameState[2][i] && gameState[0][i].isNotEmpty()) {
+                return WinningCombination(Pair(0, i), Pair(2, i))
+            }
+        }
+
+        if (gameState[0][0] == gameState[1][1] && gameState[1][1] == gameState[2][2] && gameState[0][0].isNotEmpty()) {
+            return WinningCombination(Pair(0, 0), Pair(2, 2))
+        }
+        if (gameState[0][2] == gameState[1][1] && gameState[1][1] == gameState[2][0] && gameState[0][2].isNotEmpty()) {
+            return WinningCombination(Pair(0, 2), Pair(2, 0))
+        }
+
+        return null
+    }
+
 }
