@@ -8,6 +8,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +30,8 @@ fun ListScreen(
 ) {
     val listViewModel = getViewModel<ListViewModel>()
     val ticTacToeViewModel = getViewModel<TicTacToeViewModel>()
+
+    val value by listViewModel.listState
 
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -52,7 +55,6 @@ fun ListScreen(
         ) { index ->
             when (index) {
                 0 -> {
-                    val value = listViewModel.onGoingState.value
                     when (value) {
                         is Resource.Success -> {
                             ListPager(
@@ -64,19 +66,12 @@ fun ListScreen(
                                 }
                             )
                         }
-
-                        is Resource.Loading -> {
-
-                        }
-
-                        is Resource.Error -> {
-
-                        }
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {}
                     }
                 }
 
                 1 -> {
-                    val value = listViewModel.finishedState.value
                     when (value) {
                         is Resource.Success -> {
                             ListPager(
@@ -88,14 +83,8 @@ fun ListScreen(
                                 }
                             )
                         }
-
-                        is Resource.Loading -> {
-
-                        }
-
-                        is Resource.Error -> {
-
-                        }
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {}
                     }
                 }
             }

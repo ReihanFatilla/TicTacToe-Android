@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 class TicTacToeRepositoryImpl(
     val remoteDataSource: RemoteDataSource
 ): TicTacToeRepository {
-    override fun getTicTacToeList(ticTacToeType: TicTacToeType) = flow {
+    override fun getTicTacToeList() = flow {
         try {
             emit(Resource.Loading())
             val list = remoteDataSource.getTicTacToeList().map { it.toModel() }

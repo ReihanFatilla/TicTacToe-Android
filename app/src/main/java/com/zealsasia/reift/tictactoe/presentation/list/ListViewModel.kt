@@ -14,50 +14,28 @@ import kotlinx.coroutines.flow.onEach
 
 class ListViewModel(val ticTacToeUseCase: TicTacToeUseCase) : ViewModel() {
 
-    private val _onGoingState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
-    val onGoingState: State<Resource<List<TicTacToe>>> = _onGoingState
+    private val _listState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
+    val listState: State<Resource<List<TicTacToe>>> = _listState
 
-    private val _finishedState: MutableState<Resource<List<TicTacToe>>> = mutableStateOf(Resource.Loading())
-    val finishedState: State<Resource<List<TicTacToe>>> = _finishedState
-
-    private fun getFinishedList() {
-        ticTacToeUseCase.getTicTacToeList(TicTacToeType.FINISHED).onEach { result ->
+    fun getTicTacToeList() {
+        ticTacToeUseCase.getTicTacToeList().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _finishedState.value = Resource.Success(result.data.orEmpty())
+                    _listState.value = Resource.Success(result.data.orEmpty())
                 }
 
                 is Resource.Loading -> {
-                    _finishedState.value = Resource.Loading()
+                    _listState.value = Resource.Loading()
                 }
 
                 is Resource.Error -> {
-                    _finishedState.value = Resource.Error(result.message ?: "Error On Fetching Game")
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-
-    private fun getOnGoingList() {
-        ticTacToeUseCase.getTicTacToeList(TicTacToeType.ONGOING).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _onGoingState.value = Resource.Success(result.data.orEmpty())
-                }
-
-                is Resource.Loading -> {
-                    _onGoingState.value = Resource.Loading()
-                }
-
-                is Resource.Error -> {
-                    _onGoingState.value = Resource.Error(result.message ?: "Error On Fetching Game")
+                    _listState.value = Resource.Error(result.message ?: "Error On Fetching Game")
                 }
             }
         }.launchIn(viewModelScope)
     }
 
     init {
-        getFinishedList()
-        getOnGoingList()
+        getTicTacToeList()
     }
 }

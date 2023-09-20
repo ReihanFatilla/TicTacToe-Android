@@ -23,6 +23,7 @@ import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import kotlinx.serialization.json.Json
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -56,7 +57,7 @@ val networkModule = module {
 
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
-                header("Device-Token", Utils.generateUserToken())
+                header("Device-Token", Utils.generateUserToken(androidContext()))
                 accept(ContentType.Application.Json)
             }
         }

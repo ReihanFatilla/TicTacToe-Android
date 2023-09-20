@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.zealsasia.reift.tictactoe.presentation.list.ListViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.utils.Resource
 import kotlinx.coroutines.CoroutineScope
@@ -41,6 +42,7 @@ fun BottomBar(
 ): @Composable () -> Unit =
     {
         val viewModel = getViewModel<TicTacToeViewModel>()
+        val listViewModel = getViewModel<ListViewModel>()
 
         var openDialog by remember { mutableStateOf(false) }
 
@@ -59,7 +61,12 @@ fun BottomBar(
                 openDialog = false
             },
             onSaveClick = { name ->
-                viewModel.saveTicTacToe(name)
+                if (viewModel.isUpdateMode) {
+                    viewModel.updateTicTacToe(name)
+                } else {
+                    viewModel.saveTicTacToe(name)
+                }
+                listViewModel.getTicTacToeList()
                 openDialog = false
             }
         )

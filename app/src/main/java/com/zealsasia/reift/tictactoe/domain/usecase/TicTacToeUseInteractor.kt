@@ -7,8 +7,8 @@ import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import kotlinx.coroutines.flow.Flow
 
 class TicTacToeUseInteractor(val ticTacToeRepository: TicTacToeRepository): TicTacToeUseCase {
-    override fun getTicTacToeList(ticTacToeType: TicTacToeType): Flow<Resource<List<TicTacToe>>> {
-        return ticTacToeRepository.getTicTacToeList(ticTacToeType)
+    override fun getTicTacToeList(): Flow<Resource<List<TicTacToe>>> {
+        return ticTacToeRepository.getTicTacToeList()
     }
 
     override fun saveTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>> {

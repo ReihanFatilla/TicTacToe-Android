@@ -1,14 +1,13 @@
 package com.zealsasia.reift.tictactoe.utils
 
 import android.content.Context
-import android.provider.Settings
+import android.provider.Settings.Secure
 import java.util.UUID
 
+
 object Utils {
-    fun generateUserToken(): String {
-        val uuid = UUID.randomUUID()
-//        return uuid.toString()
-        return "abc123"
+    fun generateUserToken(context: Context): String? {
+        return Secure.getString(context.contentResolver, Secure.ANDROID_ID)
     }
 
     fun isGameFinished(board: List<List<String>>): Boolean {

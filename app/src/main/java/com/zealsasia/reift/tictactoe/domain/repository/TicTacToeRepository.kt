@@ -6,7 +6,7 @@ import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import kotlinx.coroutines.flow.Flow
 
 interface TicTacToeRepository{
-    fun getTicTacToeList(ticTacToeType: TicTacToeType): Flow<Resource<List<TicTacToe>>>
+    fun getTicTacToeList(): Flow<Resource<List<TicTacToe>>>
     fun saveTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>>
     fun updateTicTacToe(ticTacToe: TicTacToe): Flow<Resource<String>>
 }

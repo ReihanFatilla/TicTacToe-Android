@@ -25,6 +25,7 @@ class TicTacToeViewModel(
     val ticTacToeState get() = _ticTacToeState as StateFlow<TicTacToe>
 
     var isFinished by mutableStateOf(false)
+    var isUpdateMode by mutableStateOf(false)
     var postUpdateState by mutableStateOf<Resource<String?>?>(null)
 
     fun setOnClickState(row: Int, column: Int) {
@@ -45,6 +46,7 @@ class TicTacToeViewModel(
     fun resetTicTacToe(){
         _ticTacToeState.update { TicTacToe.initial }
         isFinished = false
+        isUpdateMode = false
     }
 
     private fun checkIfGameFinished(state: List<MutableList<String>>) {
@@ -55,6 +57,7 @@ class TicTacToeViewModel(
 
     fun setCurrentTicTacToe(ticTacToe: TicTacToe) {
         isFinished = ticTacToe.ticTacToeType == TicTacToeType.FINISHED
+        isUpdateMode = true
         _ticTacToeState.update {
             ticTacToe
         }
@@ -68,6 +71,7 @@ class TicTacToeViewModel(
                 is Resource.Error -> Resource.Error(result.message ?: "Error")
             }
         }.launchIn(viewModelScope)
+        resetTicTacToe()
     }
 
     fun updateTicTacToe(name: String = ticTacToeState.value.name.orEmpty()) {
@@ -79,6 +83,7 @@ class TicTacToeViewModel(
                 is Resource.Error -> Resource.Error(result.message ?: "Error")
             }
         }.launchIn(viewModelScope)
+        resetTicTacToe()
     }
 
 }
