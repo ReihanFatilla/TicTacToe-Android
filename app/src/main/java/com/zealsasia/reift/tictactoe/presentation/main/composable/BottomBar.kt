@@ -56,9 +56,7 @@ fun BottomBar(
             onSaveClick = { name ->
                 if (viewModel.isUpdateMode) {
                     viewModel.updateTicTacToe(name)
-                    Log.i("BottomBarss", "BottomBarss: update")
                 } else {
-                    Log.i("BottomBarss", "BottomBarss: save")
                     viewModel.saveTicTacToe(name)
                 }
                 viewModel.openDialog = false

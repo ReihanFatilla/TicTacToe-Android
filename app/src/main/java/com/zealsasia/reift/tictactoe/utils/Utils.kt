@@ -2,6 +2,8 @@ package com.zealsasia.reift.tictactoe.utils
 
 import android.content.Context
 import android.provider.Settings.Secure
+import java.io.FileInputStream
+import java.util.Properties
 import java.util.UUID
 
 
@@ -37,10 +39,6 @@ object Utils {
         return if (xTotal > oTotal && !isFinished) "O" else "X"
     }
 
-
-
-    // ...
-
     fun getWinningCombination(gameState: List<List<String>>): WinningCombination? {
 
         for (i in 0 until 3) {
@@ -62,5 +60,4 @@ object Utils {
 
         return null
     }
-
 }

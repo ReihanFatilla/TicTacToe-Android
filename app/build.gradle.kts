@@ -8,7 +8,9 @@ android {
     namespace = "com.zealsasia.reift.tictactoe"
     compileSdk = 33
 
-    defaultConfig {
+    val baseUrl = findProperty("BaseUrl") as String
+
+        defaultConfig {
         applicationId = "com.zealsasia.reift.tictactoe"
         minSdk = 26
         targetSdk = 33
@@ -28,6 +30,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", baseUrl)
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", baseUrl)
         }
     }
     compileOptions {
@@ -39,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -79,7 +86,5 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-android:3.2.0-beta-1")
-    implementation("io.insert-koin:koin-androidx-navigation:3.2.0-beta-1")
     implementation("io.insert-koin:koin-androidx-compose:3.2.0-beta-1")
-    testImplementation("io.insert-koin:koin-test-junit4:3.2.0-beta-1")
 }
