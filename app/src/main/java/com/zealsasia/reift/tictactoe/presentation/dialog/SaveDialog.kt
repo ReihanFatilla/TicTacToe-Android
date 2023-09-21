@@ -1,4 +1,4 @@
-package com.zealsasia.reift.tictactoe.presentation.main.composable
+package com.zealsasia.reift.tictactoe.presentation.dialog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

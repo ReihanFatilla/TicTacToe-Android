@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
-import com.zealsasia.reift.tictactoe.presentation.common.StateDialog
+import com.zealsasia.reift.tictactoe.presentation.dialog.StateDialog
 import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.composable.BottomBar

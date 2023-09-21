@@ -58,9 +58,12 @@ fun ListScreen(
                         modifier = modifier.fillMaxWidth(),
                         listTicTacToe = value.data.orEmpty()
                             .filter { it.ticTacToeType == if(index == 0) TicTacToeType.ONGOING else TicTacToeType.FINISHED },
-                        onTicTacToeClicked = {
+                        onTicTacToeDelete = { id ->
+                            ticTacToeViewModel.deleteTicTacToe(id)
+                        },
+                        onTicTacToeClicked = { ticTacToe ->
                             if(ticTacToeViewModel.checkIfGameStateEmpty() || ticTacToeViewModel.isHistoryMode){
-                                ticTacToeViewModel.setCurrentTicTacToe(it)
+                                ticTacToeViewModel.setCurrentTicTacToe(ticTacToe)
                             } else {
                                 ticTacToeViewModel.openDialog = true
                             }

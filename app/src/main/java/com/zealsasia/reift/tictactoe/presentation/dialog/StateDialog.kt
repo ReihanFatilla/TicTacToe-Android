@@ -1,4 +1,4 @@
-package com.zealsasia.reift.tictactoe.presentation.common
+package com.zealsasia.reift.tictactoe.presentation.dialog
 
 import android.util.Log
 import androidx.compose.foundation.background

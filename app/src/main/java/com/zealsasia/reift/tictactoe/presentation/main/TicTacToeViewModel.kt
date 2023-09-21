@@ -79,6 +79,16 @@ class TicTacToeViewModel(
         resetTicTacToe()
     }
 
+    fun deleteTicTacToe(id: Int) {
+        ticTacToeUseCase.deleteTicTacToe(id).onEach { result ->
+            postUpdateState = when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Loading -> Resource.Loading()
+                is Resource.Error -> Resource.Error(result.message ?: "Error")
+            }
+        }.launchIn(viewModelScope)
+    }
+
     fun checkIfGameStateEmpty(): Boolean {
         return ticTacToeState.value.gameState == TicTacToe.initial.gameState
     }
