@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
+import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import com.zealsasia.reift.tictactoe.utils.Utils
 import org.koin.androidx.compose.getViewModel
 
@@ -18,7 +19,7 @@ fun WinnerLine(){
     val viewModel = getViewModel<TicTacToeViewModel>()
     val state by viewModel.ticTacToeState.collectAsState()
 
-    if (viewModel.isFinished) {
+    if (state.ticTacToeType == TicTacToeType.FINISHED) {
         val winningCombination = Utils.getWinningCombination(state.gameState)
         if (winningCombination != null) {
             val (startRow, startColumn) = winningCombination.start

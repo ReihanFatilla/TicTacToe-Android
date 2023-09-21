@@ -38,6 +38,7 @@ import com.zealsasia.reift.tictactoe.presentation.list.ListScreen
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
 import com.zealsasia.reift.tictactoe.presentation.main.composable.BottomBar
 import com.zealsasia.reift.tictactoe.presentation.main.composable.TopBar
+import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
@@ -80,15 +81,13 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun WinnerOrTurnText(state: TicTacToe, modifier: Modifier = Modifier) {
-    val viewModel =  getViewModel<TicTacToeViewModel>()
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(28.dp))
         Text(
-            text = if(viewModel.isFinished){
+            text = if(state.ticTacToeType  == TicTacToeType.FINISHED){
                 "Winner:"
             } else {
                 "Turn:"

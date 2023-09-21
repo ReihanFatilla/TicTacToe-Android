@@ -60,7 +60,7 @@ fun ListScreen(
                         listTicTacToe = value.data.orEmpty()
                             .filter { it.ticTacToeType == if(index == 0) TicTacToeType.ONGOING else TicTacToeType.FINISHED },
                         onTicTacToeClicked = {
-                            if(ticTacToeViewModel.checkIfGameStateEmpty() || ticTacToeViewModel.isFinished && ticTacToeViewModel.isUpdateMode){
+                            if(ticTacToeViewModel.checkIfGameStateEmpty() || ticTacToeViewModel.isHistoryMode){
                                 ticTacToeViewModel.setCurrentTicTacToe(it)
                             } else {
                                 ticTacToeViewModel.openDialog = true

@@ -12,6 +12,7 @@ import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.utils.Resource
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import com.zealsasia.reift.tictactoe.utils.Utils
+import com.zealsasia.reift.tictactoe.utils.Utils.isGameFinished
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.getAndUpdate
@@ -27,21 +28,19 @@ class TicTacToeViewModel(
     val ticTacToeState get() = _ticTacToeState as StateFlow<TicTacToe>
 
     var openDialog by mutableStateOf(false)
-
-    var isFinished by mutableStateOf(false)
     var isUpdateMode by mutableStateOf(false)
+    var isHistoryMode by mutableStateOf(false)
     var postUpdateState by mutableStateOf<Resource<String?>?>(null)
 
     fun setOnClickState(row: Int, column: Int) {
-        if (ticTacToeState.value.gameState[row][column] == "" && !isFinished) {
+        if (ticTacToeState.value.gameState[row][column] == "" && ticTacToeState.value.ticTacToeType == TicTacToeType.ONGOING) {
             _ticTacToeState.getAndUpdate {
                 val newState = it.gameState.map { it.toMutableList() }
                 newState[row][column] = it.currentTurn
-                checkIfGameFinished(newState)
                 it.copy(
                     gameState = newState,
-                    ticTacToeType = if(isFinished) TicTacToeType.FINISHED else TicTacToeType.ONGOING,
-                    currentTurn = if(!isFinished) if (it.currentTurn == "X") "O" else "X" else it.currentTurn
+                    ticTacToeType = if(newState.isGameFinished()) TicTacToeType.FINISHED else TicTacToeType.ONGOING,
+                    currentTurn = if(!newState.isGameFinished()) if (it.currentTurn == "X") "O" else "X" else it.currentTurn
                 )
             }
         }
@@ -49,19 +48,12 @@ class TicTacToeViewModel(
 
     fun resetTicTacToe(){
         _ticTacToeState.update { TicTacToe.initial }
-        isFinished = false
         isUpdateMode = false
     }
 
-    private fun checkIfGameFinished(state: List<MutableList<String>>) {
-        if (Utils.isGameFinished(state)) {
-            isFinished = true
-        }
-    }
-
     fun setCurrentTicTacToe(ticTacToe: TicTacToe) {
-        isFinished = ticTacToe.ticTacToeType == TicTacToeType.FINISHED
-        isUpdateMode = true
+        isHistoryMode = ticTacToe.ticTacToeType == TicTacToeType.FINISHED
+        isUpdateMode = ticTacToe.ticTacToeType == TicTacToeType.ONGOING
         _ticTacToeState.update {
             ticTacToe
         }

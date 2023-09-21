@@ -9,13 +9,13 @@ object Utils {
         return Secure.getString(context.contentResolver, Secure.ANDROID_ID)
     }
 
-    fun isGameFinished(board: List<List<String>>): Boolean {
+    fun List<List<String>>.isGameFinished(): Boolean {
         for (i in 0 until 3) {
-            if (board[i][0] != "" && board[i][0] == board[i][1] && board[i][1] == board[i][2]) return true
-            if (board[0][i] != "" && board[0][i] == board[1][i] && board[1][i] == board[2][i]) return true
+            if (this[i][0] != "" && this[i][0] == this[i][1] && this[i][1] == this[i][2]) return true
+            if (this[0][i] != "" && this[0][i] == this[1][i] && this[1][i] == this[2][i]) return true
         }
-        return board[0][0] != "" && board[0][0] == board[1][1] && board[1][1] == board[2][2] ||
-                board[0][2] != "" && board[0][2] == board[1][1] && board[1][1] == board[2][0]
+        return this[0][0] != "" && this[0][0] == this[1][1] && this[1][1] == this[2][2] ||
+                this[0][2] != "" && this[0][2] == this[1][1] && this[1][1] == this[2][0]
     }
 
 
