@@ -57,4 +57,8 @@ object Utils {
 
         return null
     }
+
+    fun List<List<String?>>.map(): List<List<String>> {
+        return map { it.map { it.orEmpty() } }
+    }
 }

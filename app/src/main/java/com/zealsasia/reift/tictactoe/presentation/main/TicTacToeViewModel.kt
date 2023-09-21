@@ -1,9 +1,7 @@
 package com.zealsasia.reift.tictactoe.presentation.main
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +9,6 @@ import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.utils.Resource
 import com.zealsasia.reift.tictactoe.utils.TicTacToeType
-import com.zealsasia.reift.tictactoe.utils.Utils
 import com.zealsasia.reift.tictactoe.utils.Utils.isGameFinished
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

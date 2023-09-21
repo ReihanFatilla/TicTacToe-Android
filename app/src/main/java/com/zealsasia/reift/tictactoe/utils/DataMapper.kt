@@ -1,8 +1,8 @@
 package com.zealsasia.reift.tictactoe.utils
 
-import android.util.Log
 import com.zealsasia.reift.tictactoe.data.source.remote.dto.TicTacToeDTO
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
+import com.zealsasia.reift.tictactoe.utils.Utils.map
 
 fun TicTacToeDTO.toModel(): TicTacToe {
     return TicTacToe(
@@ -21,8 +21,4 @@ fun TicTacToe.toDTO(): TicTacToeDTO {
         type = if(ticTacToeType == TicTacToeType.ONGOING) "ongoing" else "finished",
         game_state = gameState
     )
-}
-
-fun List<List<String?>>.map(): List<List<String>> {
-    return map { it.map { it.orEmpty() } }
 }

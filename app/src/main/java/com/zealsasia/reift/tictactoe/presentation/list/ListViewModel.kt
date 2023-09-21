@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.domain.usecase.TicTacToeUseCase
 import com.zealsasia.reift.tictactoe.utils.Resource
-import com.zealsasia.reift.tictactoe.utils.TicTacToeType
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

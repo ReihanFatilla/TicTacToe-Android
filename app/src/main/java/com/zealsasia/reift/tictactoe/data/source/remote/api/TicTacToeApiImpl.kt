@@ -4,7 +4,6 @@ import com.zealsasia.reift.tictactoe.data.source.remote.dto.PostUpdateDTO
 import com.zealsasia.reift.tictactoe.data.source.remote.dto.TicTacToeDTO
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import io.ktor.client.request.headers
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.url

@@ -12,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zealsasia.reift.tictactoe.domain.model.TicTacToe
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListPager
 import com.zealsasia.reift.tictactoe.presentation.list.composable.ListTabRow
 import com.zealsasia.reift.tictactoe.presentation.main.TicTacToeViewModel
