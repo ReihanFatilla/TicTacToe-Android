@@ -3,11 +3,12 @@ package com.zealsasia.reift.tictactoe.presentation.main.composable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
@@ -30,7 +31,7 @@ fun RowScope.BottomButtons(
     coroutineScope: CoroutineScope,
     bottomSheetState: ModalBottomSheetState,
 ) {
-    Button(modifier = Modifier.weight(0.5f),
+    Button(modifier = Modifier.weight(0.5f).fillMaxHeight(),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
         onClick = {
             coroutineScope.launch {
@@ -46,20 +47,20 @@ fun RowScope.BottomButtons(
             )
         }
     }
-    Button(modifier = Modifier.weight(0.25f),
+    Button(modifier = Modifier.weight(0.25f).fillMaxHeight(),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+        onClick = {
+            viewModel.resetTicTacToe()
+        }) {
+        Icon(imageVector = Icons.Default.Refresh, contentDescription = "reset button")
+    }
+    Button(modifier = Modifier.weight(0.25f).fillMaxHeight(),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
         onClick = {
             if(!viewModel.checkIfGameStateEmpty()){
                 viewModel.openDialog = true
             }
         }) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = "Save button")
-    }
-    Button(modifier = Modifier.weight(0.25f),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
-        onClick = {
-            viewModel.resetTicTacToe()
-        }) {
-        Icon(imageVector = Icons.Default.Refresh, contentDescription = "reset button")
+        Icon(imageVector = Icons.Default.Done, contentDescription = "Save button")
     }
 }

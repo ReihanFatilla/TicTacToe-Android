@@ -82,7 +82,7 @@ fun WinnerOrTurnText(state: TicTacToe, modifier: Modifier = Modifier) {
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(12.dp))
         Text(
             text = if(state.ticTacToeType  == TicTacToeType.FINISHED){
                 "Winner:"

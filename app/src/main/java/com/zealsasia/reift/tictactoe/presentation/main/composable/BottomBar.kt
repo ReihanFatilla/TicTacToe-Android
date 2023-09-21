@@ -2,6 +2,7 @@ package com.zealsasia.reift.tictactoe.presentation.main.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
@@ -23,7 +24,7 @@ fun BottomBar(
         val viewModel = getViewModel<TicTacToeViewModel>()
 
         Row(
-            modifier = modifier.padding(horizontal = 20.dp),
+            modifier = modifier.height(88.dp).padding(20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             BottomButtons(viewModel, coroutineScope, bottomSheetState)
