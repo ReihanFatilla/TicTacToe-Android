@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +36,6 @@ fun ListPager(
     onTicTacToeClicked: (TicTacToe) -> Unit,
     onTicTacToeDelete: (Int) -> Unit,
 ) {
-
     LazyColumn(modifier = modifier.fillMaxSize()) {
         items(listTicTacToe) { ticTacToe ->
             var openDialog by remember { mutableStateOf(false) }
