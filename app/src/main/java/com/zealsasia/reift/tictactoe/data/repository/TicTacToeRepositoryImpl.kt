@@ -7,6 +7,7 @@ import com.zealsasia.reift.tictactoe.domain.repository.TicTacToeRepository
 import com.zealsasia.reift.tictactoe.utils.Resource
 import com.zealsasia.reift.tictactoe.utils.toDTO
 import com.zealsasia.reift.tictactoe.utils.toModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class TicTacToeRepositoryImpl(
@@ -37,6 +38,16 @@ class TicTacToeRepositoryImpl(
         try {
             emit(Resource.Loading())
             val message = remoteDataSource.updateTicTacToe(ticTacToe.toDTO()).message
+            emit(Resource.Success(data = message))
+        } catch (e: Exception){
+            emit(Resource.Error(message = e.message ?: "Error"))
+        }
+    }
+
+    override fun deleteTicTacToe(id: Int) = flow {
+        try {
+            emit(Resource.Loading())
+            val message = remoteDataSource.deleteTicTacToe(id).message
             emit(Resource.Success(data = message))
         } catch (e: Exception){
             emit(Resource.Error(message = e.message ?: "Error"))

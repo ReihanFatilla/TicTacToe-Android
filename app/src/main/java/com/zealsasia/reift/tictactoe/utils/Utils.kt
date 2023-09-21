@@ -1,10 +1,12 @@
 package com.zealsasia.reift.tictactoe.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.Settings.Secure
 
 
 object Utils {
+    @SuppressLint("HardwareIds")
     fun generateUserToken(context: Context): String? {
         return Secure.getString(context.contentResolver, Secure.ANDROID_ID)
     }

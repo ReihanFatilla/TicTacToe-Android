@@ -12,11 +12,12 @@ class RemoteDataSource(
         return ticTacToeApi.getTicTacToeList()
     }
     suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
-        Log.i("saveTicTacToesss", "save: ${ticTacToeDTO.name}")
         return ticTacToeApi.saveTicTacToe(ticTacToeDTO)
     }
     suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
-        Log.i("LoadingAndSuccessDialogsadasd", "id: ${ticTacToeDTO.id}")
         return ticTacToeApi.updateTicTacToe(ticTacToeDTO)
+    }
+    suspend fun deleteTicTacToe(id: Int): PostUpdateDTO {
+        return ticTacToeApi.deleteTicTacToe(id)
     }
 }
