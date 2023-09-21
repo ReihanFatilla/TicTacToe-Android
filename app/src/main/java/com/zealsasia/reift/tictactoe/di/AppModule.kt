@@ -16,7 +16,9 @@ import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.DEFAULT
 import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.accept
 import io.ktor.client.request.header
@@ -53,6 +55,7 @@ val networkModule = module {
 
             install(Logging) {
                 level = LogLevel.ALL
+                logger = Logger.DEFAULT
             }
 
             install(DefaultRequest) {

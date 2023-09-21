@@ -14,13 +14,13 @@ import io.ktor.http.contentType
 class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
     override suspend fun getTicTacToeList(): List<TicTacToeDTO> {
         return httpClient.get {
-            url(TicTacToeApi.GET_URL)
+            url(TicTacToeApi.GET_POST_URL)
         }
     }
 
     override suspend fun saveTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
         return httpClient.post {
-            url(TicTacToeApi.GET_URL)
+            url(TicTacToeApi.GET_POST_URL)
             contentType(ContentType.Application.Json)
             body = ticTacToeDTO
         }
@@ -28,7 +28,7 @@ class TicTacToeApiImpl(private val httpClient: HttpClient): TicTacToeApi {
 
     override suspend fun updateTicTacToe(ticTacToeDTO: TicTacToeDTO): PostUpdateDTO {
         return httpClient.patch {
-            url(TicTacToeApi.GET_URL)
+            url(TicTacToeApi.UPDATE_URL(ticTacToeDTO.id?.or(0).toString()))
             contentType(ContentType.Application.Json)
             body = ticTacToeDTO
         }

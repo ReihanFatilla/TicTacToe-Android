@@ -2,9 +2,6 @@ package com.zealsasia.reift.tictactoe.utils
 
 import android.content.Context
 import android.provider.Settings.Secure
-import java.io.FileInputStream
-import java.util.Properties
-import java.util.UUID
 
 
 object Utils {

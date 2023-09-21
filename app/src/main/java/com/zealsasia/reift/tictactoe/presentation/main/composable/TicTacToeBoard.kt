@@ -1,3 +1,4 @@
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,13 +10,18 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -83,15 +89,17 @@ fun RowScope.TicTacToe(row: Int, column: Int, gameState: List<List<String>>, onC
     ) {
         if (gameState[row][column] == "X") {
             Icon(
-                modifier = Modifier.size(64.dp),
-                imageVector = Icons.Default.Close,
-                contentDescription = "X"
+                modifier = Modifier.size(80.dp),
+                imageVector = Icons.Default.Clear,
+                contentDescription = "X",
+                tint = Color.Red
             )
         } else if (gameState[row][column] == "O") {
-            Icon(
+            Card(
                 modifier = Modifier.size(64.dp),
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "X"
+                shape = CircleShape,
+                border = BorderStroke(10.dp, Color.Blue),
+                content = {}
             )
         }
     }

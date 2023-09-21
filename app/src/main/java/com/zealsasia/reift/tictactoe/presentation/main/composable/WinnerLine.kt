@@ -16,10 +16,10 @@ import org.koin.androidx.compose.getViewModel
 fun WinnerLine(){
 
     val viewModel = getViewModel<TicTacToeViewModel>()
-    val ticTacToeState by viewModel.ticTacToeState.collectAsState()
+    val state by viewModel.ticTacToeState.collectAsState()
 
     if (viewModel.isFinished) {
-        val winningCombination = Utils.getWinningCombination(ticTacToeState.gameState)
+        val winningCombination = Utils.getWinningCombination(state.gameState)
         if (winningCombination != null) {
             val (startRow, startColumn) = winningCombination.start
             val (endRow, endColumn) = winningCombination.end
@@ -32,10 +32,10 @@ fun WinnerLine(){
                 val endY = endRow * cellSize + cellSize / 2
 
                 drawLine(
-                    color = Color.Blue,
+                    color = if(state.currentTurn == "O") Color.Blue else Color.Red,
                     start = Offset(startX, startY),
                     end = Offset(endX, endY),
-                    strokeWidth = 16f
+                    strokeWidth = 32f
                 )
             }
         }
