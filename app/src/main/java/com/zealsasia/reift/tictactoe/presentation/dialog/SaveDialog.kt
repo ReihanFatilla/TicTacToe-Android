@@ -82,6 +82,7 @@ fun SaveDialog(onSaveClick: (String) -> Unit) {
                         }
                         TextButton(onClick = {
                             onSaveClick(name)
+                            name = ""
                         }) {
                             Text(
                                 if (viewModel.isUpdateMode) "Update" else "Save",
